@@ -41,6 +41,8 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
 
     private int mNumberItems;
 
+    private Context mContext;
+
     /**
      * Constructor for GreenAdapter that accepts a number of items to display and the specification
      * for the ListItemClickListener.
@@ -65,9 +67,9 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
      */
     @Override
     public NumberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
+        mContext = viewGroup.getContext();
         int layoutIdForListItem = R.layout.number_list_item;
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
@@ -131,6 +133,7 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
          */
         void bind(int listIndex) {
             listItemNumberView.setText(String.valueOf(listIndex));
+            listItemNumberView.setBackgroundColor(ColorUtils.getViewHolderBackgroundColorFromInstance(mContext, listIndex));
         }
     }
 }
